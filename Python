@@ -1,0 +1,59 @@
+def arithmetic_arranger(problems, StartPrint= False):
+  # Check the length of the problem    
+  if len(problems) > 5:
+    return 'Error: Too many problems.'
+  else:
+    arranged_problems= []
+    top_space= ""
+    end_space= ""
+    body_space= ""
+    dashes= ""
+
+  # Loop through each element
+    for i, problem in enumerate(problems):
+      n = problem.split()
+      num_1 = n[0]
+      operand = n[1]
+      num_2 = n[2]
+  # Check the conditions
+      if operand not in ["+", "-"]:
+        return "Error: Operator must be '+' or '-'."
+      else:
+        for digit in num_1:
+          if digit not in ["0","1","2","3","4","5","6","7","8","9"]:
+            return "Error:  Numbers must only contain digits." 
+          else: 
+            continue
+
+        for digit in num_2:
+          if digit not in ["0","1","2","3","4","5","6","7","8","9"]:
+            return "Error: Numbers must only contain digits." 
+          else: 
+            continue        
+        if len(num_1) > 4 or len(num_2) > 4:
+          return 'Error: Numbers cannot be more than four digits.'
+        else:
+          if operand == "+":
+            sum_int = int(num_1) + int(num_2)
+          else:
+            sum_int = int(num_1) - int(num_2)
+          
+          length = max(len(num_1), len(num_2)) + 2
+          top_space += str(num_1.rjust(length))
+          body_space += str(operand + num_2.rjust(length-1))
+          dashes+= str("-" * length)
+          end_space+= str(sum_int).rjust(length)
+    # Adding to the result
+          if i < len(problems)-1:
+            top_space += "    "
+            body_space += "    "
+            dashes += "    "
+            end_space+= "    "
+            
+          if StartPrint == True: 
+            arranged_problems = (top_space + "\n" + body_space + "\n" + dashes + "\n" + end_space)
+          else: 
+            arranged_problems = (top_space + "\n" + body_space + "\n" + dashes)
+
+
+    return arranged_problems
